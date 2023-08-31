@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>タスク管理アプリケーション</title>
-    <link th:href="@{/home.css}"rel="stylesheet">
-</head>
 
+    <link th:href="@{/home.css}" rel="stylesheet">
+</head>
 <body>
 <h1>タスク管理アプリケーション</h1>
-
 <div class="task_form">
     <h2>タスクの登録</h2>
-
     <form action="/add">
         <label>タスク</label>
         <input name="task" type="text" />
@@ -20,7 +18,6 @@
         <input type="submit" value="登録" />
     </form>
 </div>
-
 <div class="tasklist">
     <h2>現在のタスク一覧</h2>
     <table border="1" style="border-collapse:collapse;">
