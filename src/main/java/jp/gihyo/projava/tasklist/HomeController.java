@@ -13,6 +13,20 @@ import java.util.List;
 
 @Controller
 public class HomeController {
+//    @RequestMapping(value ="/hello")
+//    @ResponseBody
+//    String hello(){
+//        return """
+//                <html>
+//                    <head><title>Hello</head></title>
+//                    <body>
+//                    <h1>Hello</h1>
+//                    It works!<br>
+//                    現在時刻は%sです。
+//                    </body>
+//                   </html>
+//                """.formatted(LocalDateTime.now());
+//    }
     @RequestMapping(value="/hello")
     String hello(Model model){
         model.addAttribute("time", LocalDateTime.now());
