@@ -27,9 +27,21 @@ public class HomeController {
 //                   </html>
 //                """.formatted(LocalDateTime.now());
 //    }
-    @RequestMapping(value="/hello")
-    String hello(Model model){
+
+    record TaskItem(String id, String task, String deadline, boolean done) {
+    }
+
+    private List<TaskItem> taskItems = new ArrayList<>();
+
+    @RequestMapping(value = "/hello")
+    String hello(Model model) {
         model.addAttribute("time", LocalDateTime.now());
         return "hello";
+    }
+
+    @RequestMapping("/list")
+    String listItems(Model model) {
+        model.addAttribute("taskList", taskItems);
+        return "home";
     }
 }
