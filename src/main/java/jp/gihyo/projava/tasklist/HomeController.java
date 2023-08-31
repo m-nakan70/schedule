@@ -1,5 +1,6 @@
 package jp.gihyo.projava.tasklist;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,12 @@ import java.util.UUID;
 
 @Controller
 public class HomeController {
+    private final TaskListDao dao;
+
+    @Autowired
+    HomeController(TaskListDao dao){
+        this.dao = dao;
+    }
 //    @RequestMapping(value ="/hello")
 //    @ResponseBody
 //    String hello(){
@@ -42,6 +49,7 @@ public class HomeController {
 
     @RequestMapping("/list")
     String listItems(Model model) {
+        List<TaskItem> taskItems = dao.findAll();
         model.addAttribute("taskList", taskItems);
         return "home";
     }
@@ -50,7 +58,7 @@ public class HomeController {
                    @RequestParam("deadline")String deadline){
         String id = UUID.randomUUID().toString().substring(0,8);
         TaskItem item = new TaskItem(id,task,deadline,false);
-        taskItems.add(item);
+        dao.add(item);
         return "redirect:/list";
     }
 }
