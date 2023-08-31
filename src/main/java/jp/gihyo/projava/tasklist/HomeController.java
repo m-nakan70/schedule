@@ -1,5 +1,6 @@
 package jp.gihyo.projava.tasklist;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,6 +52,7 @@ public class HomeController {
         String id = UUID.randomUUID().toString().substring(0,8);
         TaskItem item = new TaskItem(id,task,deadline,false);
         taskItems.add(item);
+
         return "redirect:/list";
     }
 }
