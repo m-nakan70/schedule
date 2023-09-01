@@ -43,7 +43,7 @@
                 getElementById('update_task').value=
                     row.cells[1].firstChild.data;
                 getElementById('update_deadline').value=row.cells[2].firstChild.data;
-                getElementById('update_status').selectedIndex=(row.cells[3].firstChild.date=='完了')?1:0;
+                getElementById('update_status').selectedIndex=(row.cells[3].firstChild.data=='完了')?1:0;
                 var dialog = getElementById('updateDialog');
                 dialog.style.left = ((window.innerWidth - 500) / 2) + 'px';
                 dialog.style.display = 'block';
