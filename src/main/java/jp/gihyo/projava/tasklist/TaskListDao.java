@@ -3,9 +3,9 @@ package jp.gihyo.projava.tasklist;
 import jp.gihyo.projava.tasklist.HomeController.TaskItem;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.jdbcTemplate;
-import org.springframework.jdbc.core.namedparm.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparm.SqlParameterSource;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jndi.support.SimpleJndiBeanFactory;
 import org.springframework.stereotype.Service;
@@ -17,16 +17,17 @@ import java.util.Objects;
 
 @Service
 public class TaskListDao {
-    private final jdbcTemplate = jdbcTemplate;
+    private final JdbcTemplate  jdbcTemplate;
 
     @Autowired
-    TaskListDao(JdbcTemplate jdbcTemplate){
+    TaskListDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+
     }
 
     public void add(TaskItem taskItem){
         SqlParameterSource parm = new BeanPropertySqlParameterSource(taskItem);
-        SimplejdbcInsert insert =
+        SimpleJdbcInsert insert =
                 new SimpleJdbcInsert(jdbcTemplate)
                         .withTableName("tasklist");
         insert.execute(parm);
@@ -41,9 +42,11 @@ public class TaskListDao {
                         row.get("id").toString(),
                         row.get("task").toString(),
                         row.get("deadline").toString(),
-                        (Boolean)row.get("done"))).toList();
+                        (Boolean)row.get("done")))
+                .toList();
 
         return taskItems;
 
     }
 }
+
